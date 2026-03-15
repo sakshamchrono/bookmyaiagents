@@ -107,7 +107,7 @@ const Hero = () => {
           >
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6 border border-indigo-100">
               <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
-              Next-Gen AI for High-Ticket Businesses
+              Next-Gen AI for Professionals and Businesses
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-8">
               Automate Sales & Support with <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Custom AI Agents</span>
@@ -154,12 +154,12 @@ const Features = () => {
       id="features" 
       className="py-24 bg-white"
       title="Features | BookMyAIAgents"
-      description="Discover why high-ticket businesses need AI. Our custom AI agents offer 24/7 availability, automated booking, and increased conversions."
+      description="Discover why Professionals and businesses need AI. Our custom AI agents offer 24/7 availability, automated booking, and increased conversions."
       keywords="AI features, automated booking, AI conversion, 24/7 AI agents, business automation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why High-Ticket Businesses Need AI</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why Professionals and Businesses Need AI</h2>
           <p className="text-lg text-slate-600">In premium markets, speed and personalization are everything. Our agents deliver both, flawlessly.</p>
         </div>
         
@@ -276,7 +276,7 @@ const Demos = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">See Our Agents in Action</h2>
-          <p className="text-lg text-slate-400">Experience how our AI handles complex, high-ticket conversations naturally and drives them toward a conversion.</p>
+          <p className="text-lg text-slate-400">Experience how our AI handles complex, conversations naturally and drives them toward a conversion.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -592,7 +592,7 @@ const Footer = () => {
               <span className="font-bold text-xl tracking-tight text-white">BookMyAIAgents</span>
             </div>
             <p className="max-w-sm">
-              Empowering high-ticket businesses with intelligent, conversational AI agents that drive revenue 24/7.
+              Empowering professionals and businesses with intelligent, conversational AI agents that drive revenue 24/7.
             </p>
           </div>
           <div>
