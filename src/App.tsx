@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
+import { useInView } from 'react-intersection-observer';
 import { 
   Bot, 
   MessageSquare, 
@@ -13,6 +15,24 @@ import {
   Phone,
   Globe
 } from 'lucide-react';
+
+// --- SEO Component ---
+const SectionSEO = ({ id, className, title, description, keywords, children }: any) => {
+  const { ref, inView } = useInView({ threshold: 0.4 });
+  
+  return (
+    <section id={id} className={className} ref={ref}>
+      {inView && (
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta name="keywords" content={keywords} />
+        </Helmet>
+      )}
+      {children}
+    </section>
+  );
+};
 
 // --- Components ---
 
@@ -130,7 +150,13 @@ const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-24 bg-white">
+    <SectionSEO 
+      id="features" 
+      className="py-24 bg-white"
+      title="Features | BookMyAIAgents"
+      description="Discover why high-ticket businesses need AI. Our custom AI agents offer 24/7 availability, automated booking, and increased conversions."
+      keywords="AI features, automated booking, AI conversion, 24/7 AI agents, business automation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why High-Ticket Businesses Need AI</h2>
@@ -156,7 +182,7 @@ const Features = () => {
           ))}
         </div>
       </div>
-    </section>
+    </SectionSEO>
   );
 };
 
@@ -240,7 +266,13 @@ const Demos = () => {
   ];
 
   return (
-    <section id="demos" className="py-24 bg-slate-900 text-white overflow-hidden">
+    <SectionSEO 
+      id="demos" 
+      className="py-24 bg-slate-900 text-white overflow-hidden"
+      title="Interactive AI Demos | BookMyAIAgents"
+      description="Try our interactive AI demos for Real Estate, E-commerce, and SaaS. See how custom AI agents can transform your customer interactions."
+      keywords="AI demos, real estate AI, ecommerce AI, SaaS AI, interactive AI agent, AI examples"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">See Our Agents in Action</h2>
@@ -287,7 +319,7 @@ const Demos = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionSEO>
   );
 };
 
@@ -311,7 +343,13 @@ const Process = () => {
   ];
 
   return (
-    <section id="process" className="py-24 bg-slate-50">
+    <SectionSEO 
+      id="process" 
+      className="py-24 bg-slate-50"
+      title="Our 14-Day Process | BookMyAIAgents"
+      description="Learn about our proven 14-day process to build and deploy custom AI agents. From discovery to deployment, we handle everything."
+      keywords="AI implementation process, 14 day AI deployment, AI development process, custom AI timeline"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How We Work</h2>
@@ -335,7 +373,7 @@ const Process = () => {
           ))}
         </div>
       </div>
-    </section>
+    </SectionSEO>
   );
 };
 
@@ -344,9 +382,22 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateEmail(formState.email)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+    
+    setEmailError('');
     setIsSubmitting(true);
     setError('');
 
@@ -400,7 +451,13 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <SectionSEO 
+      id="contact" 
+      className="py-24 bg-white"
+      title="Contact Us | BookMyAIAgents"
+      description="Ready to automate your business? Contact BookMyAIAgents today to discuss your custom AI agent requirements."
+      keywords="contact BookMyAIAgents, hire AI developer, custom AI consultation, AI automation contact"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -416,7 +473,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-900">Email Us</h4>
-                  <p className="text-slate-600">ersakshamjain@gmail.com</p>
+                  <p className="text-slate-600">saksham@bookmyaiagents.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -473,10 +530,14 @@ const Contact = () => {
                       id="email" 
                       required
                       value={formState.email}
-                      onChange={(e) => setFormState({...formState, email: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                      onChange={(e) => {
+                        setFormState({...formState, email: e.target.value});
+                        if (emailError) setEmailError('');
+                      }}
+                      className={`w-full px-4 py-3 rounded-xl border ${emailError ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-indigo-600'} focus:ring-2 focus:border-transparent outline-none transition-all`}
                       placeholder="john@company.com"
                     />
+                    {emailError && <p className="mt-1 text-sm text-red-500">{emailError}</p>}
                   </div>
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-slate-700 mb-2">Company</label>
@@ -514,7 +575,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionSEO>
   );
 };
 
@@ -552,7 +613,6 @@ const Footer = () => {
         </div>
         <div className="pt-8 border-t border-slate-800 text-sm text-center md:text-left flex flex-col md:flex-row justify-between items-center">
           <p>&copy; {new Date().getFullYear()} BookMyAIAgents.com. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">Based in the USA.</p>
         </div>
       </div>
     </footer>
